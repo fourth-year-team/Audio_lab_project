@@ -54,9 +54,10 @@ namespace AudioLabProject.Services
             Stop();
             var waveFormat = WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channels);
             var ms = new MemoryStream();
-            var writer = new WaveFileWriter(new IgnoreDisposeStream(ms), waveFormat);
-            writer.WriteSamples(samples, 0, samples.Length);
-            writer.Flush();
+            using (var writer = new WaveFileWriter(new IgnoreDisposeStream(ms), waveFormat))
+            {
+                writer.WriteSamples(samples, 0, samples.Length);
+            }
             ms.Position = 0;
             var reader = new WaveFileReader(ms);
             _wavePlayer = new WaveOutEvent();

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -70,6 +69,20 @@ namespace AudioLabProject.ViewModels
         public ISeries[] CompressionRatioSeries { get; set; }
         public ISeries[] ProcessingSpeedSeries { get; set; }
 
+        public Axis[] RatioXAxes { get; set; }
+        public Axis[] RatioYAxes { get; set; }
+        public Axis[] SpeedXAxes { get; set; }
+        public Axis[] SpeedYAxes { get; set; }
+
+        private byte[]? _lastCompressedData;
+        private float[]? _lastCompressionInput;
+
+        [ObservableProperty]
+        private bool _hasCompressedData;
+
+        [ObservableProperty]
+        private bool _isDecompressed;
+
         private readonly ObservableCollection<double> _ratioValues = new();
         private readonly ObservableCollection<double> _speedValues = new();
         private long _lastProgressTime;
@@ -89,14 +102,60 @@ namespace AudioLabProject.ViewModels
             Algorithms = new ObservableCollection<ICompressionAlgorithm>(_algorithms);
             SelectedAlgorithm = Algorithms.First();
 
-            // Initialize Charts
+            var glassPurple = SKColor.Parse("#A855F7");
+            var glassCyan = SKColor.Parse("#22D3EE");
+
+            RatioXAxes = new Axis[]
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(80)),
+                    SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(12))
+                }
+            };
+
+            RatioYAxes = new Axis[]
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(80)),
+                    SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(12))
+                }
+            };
+
+            SpeedXAxes = new Axis[]
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(80)),
+                    SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(12))
+                }
+            };
+
+            SpeedYAxes = new Axis[]
+            {
+                new Axis
+                {
+                    LabelsPaint = new SolidColorPaint(SKColors.White.WithAlpha(80)),
+                    SeparatorsPaint = new SolidColorPaint(SKColors.White.WithAlpha(12))
+                }
+            };
+
             CompressionRatioSeries = new ISeries[]
             {
                 new LineSeries<double>
                 {
                     Values = _ratioValues,
                     Name = "Compression Ratio (%)",
-                    Fill = null
+                    Fill = new LinearGradientPaint(
+                        new SKColor[] { glassPurple.WithAlpha(50), glassPurple.WithAlpha(5) },
+                        new SKPoint(0, 0.5f),
+                        new SKPoint(0, 1)),
+                    Stroke = new SolidColorPaint(glassPurple, 2),
+                    GeometrySize = 9,
+                    GeometryStroke = new SolidColorPaint(glassPurple, 3),
+                    GeometryFill = new SolidColorPaint(SKColor.Parse("#1A1A2E")),
+                    LineSmoothness = 0.3
                 }
             };
 
@@ -106,7 +165,15 @@ namespace AudioLabProject.ViewModels
                 {
                     Values = _speedValues,
                     Name = "Speed (Samples/ms)",
-                    Fill = null
+                    Fill = new LinearGradientPaint(
+                        new SKColor[] { glassCyan.WithAlpha(50), glassCyan.WithAlpha(5) },
+                        new SKPoint(0, 0.5f),
+                        new SKPoint(0, 1)),
+                    Stroke = new SolidColorPaint(glassCyan, 2),
+                    GeometrySize = 9,
+                    GeometryStroke = new SolidColorPaint(glassCyan, 3),
+                    GeometryFill = new SolidColorPaint(SKColor.Parse("#1A1A2E")),
+                    LineSmoothness = 0.3
                 }
             };
         }
@@ -122,7 +189,6 @@ namespace AudioLabProject.ViewModels
                 OriginalSamples = await _audioService.LoadSamplesAsync(filePath);
                 TargetSampleRate = Metadata.SampleRate;
 
-                // Clear previous compression data
                 _ratioValues.Clear();
                 _speedValues.Clear();
                 LastResult = new CompressionResult();
@@ -174,7 +240,6 @@ namespace AudioLabProject.ViewModels
 
                 var stopwatch = Stopwatch.StartNew();
                 
-                // Pre-processing
                 float[] samplesToCompress = OriginalSamples;
                 if (TargetSampleRate != Metadata.SampleRate)
                 {
@@ -202,26 +267,25 @@ namespace AudioLabProject.ViewModels
                     }
                 });
 
-                byte[] compressed = await Task.Run(() => SelectedAlgorithm.Compress(samplesToCompress, progress, token), token);
-                ProcessedSamples = await Task.Run(() => SelectedAlgorithm.Decompress(compressed), token);
-                
-                stopwatch.Stop();
+                _lastCompressedData = await Task.Run(() => SelectedAlgorithm.Compress(samplesToCompress, progress, token), token);
+                _lastCompressionInput = samplesToCompress;
+                ProcessedSamples = null;
 
-                // Compute SNR
-                double snr = ComputeSnr(samplesToCompress, ProcessedSamples);
+                stopwatch.Stop();
 
                 LastResult = new CompressionResult
                 {
                     AlgorithmName = SelectedAlgorithm.Name,
                     OriginalSize = OriginalSamples.Length * 4,
-                    CompressedSize = compressed.Length,
+                    CompressedSize = _lastCompressedData.Length,
                     ProcessingTime = stopwatch.Elapsed,
                     Parameters = GetAlgorithmParameters(SelectedAlgorithm) + $", Rate={TargetSampleRate}, Bits={QuantizationBits}",
-                    Snr = snr
+                    Snr = -1
                 };
 
                 _ratioValues.Add(LastResult.SavingsPercentage);
-                StatusMessage = "Compression complete.";
+                HasCompressedData = true;
+                StatusMessage = "Compressed. Press DECOMPRESS to restore audio.";
             }
             catch (OperationCanceledException)
             {
@@ -239,7 +303,6 @@ namespace AudioLabProject.ViewModels
                 IsProcessing = false;
                 if (cancelled)
                 {
-                    // Remove speed values added during cancelled run
                     while (_speedValues.Count > initialSpeedCount)
                         _speedValues.RemoveAt(_speedValues.Count - 1);
                 }
@@ -278,6 +341,7 @@ namespace AudioLabProject.ViewModels
             return "Default";
         }
 
+
         [RelayCommand]
         public void CancelCompression()
         {
@@ -289,6 +353,10 @@ namespace AudioLabProject.ViewModels
         {
             CancelCompression();
             ProcessedSamples = null;
+            _lastCompressedData = null;
+            _lastCompressionInput = null;
+            HasCompressedData = false;
+            IsDecompressed = false;
             CompressionProgress = 0;
             QuantizationBits = 16;
             if (Metadata != null) TargetSampleRate = Metadata.SampleRate;
@@ -296,6 +364,45 @@ namespace AudioLabProject.ViewModels
             _speedValues.Clear();
             LastResult = new CompressionResult();
             StatusMessage = "Ready";
+            SelectedAlgorithm = Algorithms.First();
+            foreach (var algo in _algorithms)
+            {
+                if (algo is DeltaModulationAlgorithm dm) dm.StepSize = 0.01f;
+                else if (algo is AdmAlgorithm adm) { adm.MinStep = 0.001f; adm.MaxStep = 0.1f; adm.Multiplier = 1.5f; }
+                else if (algo is NonlinearQuantizationAlgorithm nl) nl.Mu = 255.0;
+            }
+        }
+
+        [RelayCommand]
+        public void Decompress()
+        {
+            if (_lastCompressedData == null) return;
+            try
+            {
+                StatusMessage = "Decompressing...";
+                float[] decompressed = SelectedAlgorithm.Decompress(_lastCompressedData);
+                ProcessedSamples = decompressed;
+                IsDecompressed = true;
+
+                double snr = -1;
+                if (_lastCompressionInput != null && decompressed.Length == _lastCompressionInput.Length)
+                    snr = ComputeSnr(_lastCompressionInput, decompressed);
+
+                LastResult = new CompressionResult
+                {
+                    AlgorithmName = LastResult.AlgorithmName,
+                    OriginalSize = LastResult.OriginalSize,
+                    CompressedSize = LastResult.CompressedSize,
+                    ProcessingTime = LastResult.ProcessingTime,
+                    Parameters = LastResult.Parameters,
+                    Snr = snr
+                };
+                StatusMessage = "Decompression complete. Ready for playback.";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Decompress error: {ex.Message}";
+            }
         }
 
         [RelayCommand]
@@ -317,7 +424,7 @@ namespace AudioLabProject.ViewModels
         public void SaveProcessed(string filePath)
         {
             if (ProcessedSamples == null) return;
-            _audioService.SaveWav(filePath, ProcessedSamples, Metadata.SampleRate, Metadata.Channels);
+            _audioService.SaveWav(filePath, ProcessedSamples, TargetSampleRate, Metadata.Channels);
             StatusMessage = $"Saved to {filePath}";
         }
     }

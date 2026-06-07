@@ -17,7 +17,10 @@ namespace AudioLabProject.Algorithms
             {
                 ct.ThrowIfCancellationRequested();
                 short currentValue = (short)(samples[i] * short.MaxValue);
-                short difference = (short)(currentValue - lastValue);
+                int rawDiff = currentValue - lastValue;
+                if (rawDiff > short.MaxValue) rawDiff = short.MaxValue;
+                if (rawDiff < short.MinValue) rawDiff = short.MinValue;
+                short difference = (short)rawDiff;
                 byte[] bytes = BitConverter.GetBytes(difference);
                 result[i * 2] = bytes[0];
                 result[i * 2 + 1] = bytes[1];

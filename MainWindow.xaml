@@ -7,89 +7,186 @@
         xmlns:vm="clr-namespace:AudioLabProject.ViewModels"
         xmlns:conv="clr-namespace:AudioLabProject.Converters"
         mc:Ignorable="d"
-        Title="AudioLab Pro" Height="820" Width="1280"
-        WindowStartupLocation="CenterScreen"
-        Background="#0B1121" AllowDrop="True" Drop="Window_Drop"
+        Title="AudioLab Pro" WindowState="Maximized"
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop"
         TextElement.FontFamily="Segoe UI, sans-serif">
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
 
-        
-<Color x:Key="PrimaryColor">#6366F1</Color>
-        <Color x:Key="PrimaryLight">#818CF8</Color>
-        <Color x:Key="AccentCyan">#06B6D4</Color>
-        <Color x:Key="SuccessGreen">#10B981</Color>
-        <Color x:Key="DangerRed">#EF4444</Color>
-        <Color x:Key="WarningAmber">#F59E0B</Color>
-        <Color x:Key="BgBase">#0B1121</Color>
-        <Color x:Key="BgSurface">#131C31</Color>
-        <Color x:Key="BgCard">#1A233A</Color>
-        <Color x:Key="BgElevated">#1E293B</Color>
-        <Color x:Key="BgHover">#243049</Color>
-        <Color x:Key="BorderDefault">#1E3A5F</Color>
-        <Color x:Key="BorderSubtle">#1E293B</Color>
-        <Color x:Key="TextPrimary">#F1F5F9</Color>
-        <Color x:Key="TextSecondary">#94A3B8</Color>
-        <Color x:Key="TextMuted">#64748B</Color>
+        <Color x:Key="GlassAccent">#A855F7</Color>
+        <Color x:Key="GlassCyan">#22D3EE</Color>
+        <Color x:Key="GlassPink">#EC4899</Color>
+        <Color x:Key="GlassGreen">#10B981</Color>
+        <Color x:Key="GlassRed">#EF4444</Color>
+        <Color x:Key="GlassAmber">#F59E0B</Color>
 
-        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
-        <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLight}"/>
-        <SolidColorBrush x:Key="CyanBrush" Color="{StaticResource AccentCyan}"/>
-        <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessGreen}"/>
-        <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerRed}"/>
-        <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningAmber}"/>
-        <SolidColorBrush x:Key="BaseBrush" Color="{StaticResource BgBase}"/>
-        <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource BgSurface}"/>
-        <SolidColorBrush x:Key="CardBrush" Color="{StaticResource BgCard}"/>
-        <SolidColorBrush x:Key="ElevatedBrush" Color="{StaticResource BgElevated}"/>
-        <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource BgHover}"/>
-        <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderDefault}"/>
-        <SolidColorBrush x:Key="BorderSubtleBrush" Color="{StaticResource BorderSubtle}"/>
-        <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}"/>
-        <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}"/>
-        <SolidColorBrush x:Key="TextMutedBrush" Color="{StaticResource TextMuted}"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource GlassAccent}"/>
+        <SolidColorBrush x:Key="CyanBrush" Color="{StaticResource GlassCyan}"/>
+        <SolidColorBrush x:Key="PinkBrush" Color="{StaticResource GlassPink}"/>
+        <SolidColorBrush x:Key="GreenBrush" Color="{StaticResource GlassGreen}"/>
+        <SolidColorBrush x:Key="RedBrush" Color="{StaticResource GlassRed}"/>
+        <SolidColorBrush x:Key="AmberBrush" Color="{StaticResource GlassAmber}"/>
 
-        
-<LinearGradientBrush x:Key="CardGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#1E293B" Offset="0"/>
-            <GradientStop Color="#18233A" Offset="1"/>
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#F1F5F9"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#94A3B8"/>
+        <SolidColorBrush x:Key="TextMutedBrush" Color="#64748B"/>
+
+        <LinearGradientBrush x:Key="WindowBg" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0F0A1E" Offset="0"/>
+            <GradientStop Color="#1A0A2E" Offset="0.4"/>
+            <GradientStop Color="#0A1628" Offset="1"/>
         </LinearGradientBrush>
 
-        <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="{StaticResource PrimaryColor}" Offset="0"/>
-            <GradientStop Color="{StaticResource AccentCyan}" Offset="1"/>
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="{StaticResource GlassAccent}" Offset="0"/>
+            <GradientStop Color="{StaticResource GlassCyan}" Offset="1"/>
         </LinearGradientBrush>
 
-        <SolidColorBrush x:Key="SidebarBg" Color="#0A0F1D"/>
+        <LinearGradientBrush x:Key="PinkGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="{StaticResource GlassPink}" Offset="0"/>
+            <GradientStop Color="{StaticResource GlassAccent}" Offset="1"/>
+        </LinearGradientBrush>
 
-        <Style x:Key="ModernButton" TargetType="Button">
+        <DrawingBrush x:Key="GrainTexture" TileMode="Tile" Viewport="0,0,6,6" ViewportUnits="Absolute" Viewbox="0,0,6,6" ViewboxUnits="Absolute" Opacity="0.015">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="1,1" RadiusX="0.3" RadiusY="0.3"/></GeometryDrawing.Geometry></GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="4,5" RadiusX="0.3" RadiusY="0.3"/></GeometryDrawing.Geometry></GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="3,2" RadiusX="0.2" RadiusY="0.2"/></GeometryDrawing.Geometry></GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="5,0" RadiusX="0.2" RadiusY="0.2"/></GeometryDrawing.Geometry></GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="0,4" RadiusX="0.2" RadiusY="0.2"/></GeometryDrawing.Geometry></GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="2,6" RadiusX="0.15" RadiusY="0.15"/></GeometryDrawing.Geometry></GeometryDrawing>
+                    <GeometryDrawing Brush="#FFFFFF"><GeometryDrawing.Geometry><EllipseGeometry Center="6,3" RadiusX="0.15" RadiusY="0.15"/></GeometryDrawing.Geometry></GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+
+        <SolidColorBrush x:Key="GlassCardBg" Color="#1A1A2E"/>
+        <SolidColorBrush x:Key="GlassCardBorder" Color="#2A2A4A"/>
+        <SolidColorBrush x:Key="GlassSidebarBg" Color="#0D0D1A"/>
+        <SolidColorBrush x:Key="GlassHoverBg" Color="#2A2A50"/>
+        <SolidColorBrush x:Key="GlassInputBg" Color="#12122A"/>
+        <SolidColorBrush x:Key="GlassElevatedBg" Color="#222244"/>
+
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="{StaticResource GlassElevatedBg}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource GlassCardBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GlassScrollBar" TargetType="ScrollBar">
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Border Background="#141428" CornerRadius="3">
+                                <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageUpCommand" Background="Transparent"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageDownCommand" Background="Transparent"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Background="{StaticResource GlassHoverBg}" BorderThickness="0" Margin="0,1">
+                                            <Thumb.Style>
+                                                <Style TargetType="Thumb">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Thumb">
+                                                                <Border Background="{TemplateBinding Background}" CornerRadius="3"/>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsDragging" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Thumb.Style>
+                                        </Thumb>
+                                    </Track.Thumb>
+                                </Track>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GlassScrollViewer" TargetType="ScrollViewer">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Grid>
+                            <ScrollContentPresenter CanContentScroll="True" Margin="{TemplateBinding Padding}"/>
+                            <ScrollBar x:Name="PART_VerticalScrollBar" Style="{StaticResource GlassScrollBar}" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" HorizontalAlignment="Right" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GlassCard" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource GlassCardBg}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource GlassCardBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <Style x:Key="GlassCardHover" TargetType="Border" BasedOn="{StaticResource GlassCard}"/>
+
+        <Style x:Key="GlassButton" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="18,12"/>
+            <Setter Property="Padding" Value="22,13"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="12" Opacity="0.3" Color="{StaticResource PrimaryColor}"/>
-                            </Border.Effect>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="False"/>
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="12" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}"/>
+                                <Setter Property="Background" Value="#9333EA"/>
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.92"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Opacity" Value="0.85"/>
+                                <Setter Property="Opacity" Value="0.8"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.4"/>
+                                <Setter Property="Opacity" Value="0.3"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -97,20 +194,22 @@
             </Setter>
         </Style>
 
-        <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
-            <Setter Property="Background" Value="{StaticResource ElevatedBrush}"/>
+        <Style x:Key="GlassSecondButton" TargetType="Button" BasedOn="{StaticResource GlassButton}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource GlassCardBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="False"/>
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="12" Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource HoverBrush}"/>
+                                <Setter Property="Background" Value="{StaticResource GlassHoverBg}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Opacity" Value="0.85"/>
+                                <Setter Property="Opacity" Value="0.8"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -118,21 +217,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="CardBorder" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource CardGradient}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="14"/>
-            <Setter Property="Padding" Value="20"/>
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.15" Color="Black"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ProcessButtonStyle" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Style x:Key="ProcessBtnStyle" TargetType="Button" BasedOn="{StaticResource GlassButton}">
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsProcessing}" Value="True">
@@ -141,8 +226,8 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource ModernButton}">
-            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+        <Style x:Key="CancelBtnStyle" TargetType="Button" BasedOn="{StaticResource GlassButton}">
+            <Setter Property="Background" Value="{StaticResource RedBrush}"/>
             <Setter Property="Visibility" Value="Collapsed"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsProcessing}" Value="True">
@@ -151,19 +236,19 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+        <Style x:Key="GlassIconBtn" TargetType="Button" BasedOn="{StaticResource GlassButton}">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="12,8"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="15,9"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="False"/>
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}" BorderBrush="{StaticResource GlassCardBorder}" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource HoverBrush}"/>
+                                <Setter Property="Background" Value="{StaticResource GlassHoverBg}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter Property="Opacity" Value="0.7"/>
@@ -174,49 +259,29 @@
             </Setter>
         </Style>
 
-        <Style x:Key="DragOverBorderStyle" TargetType="Border">
-            <Setter Property="Background" Value="Transparent"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsDraggingOver}" Value="True">
-                    <Setter Property="Background" Value="#336366F1"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
-                    <Setter Property="BorderThickness" Value="3"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="WelcomeScreenStyle" TargetType="Border">
-            <Setter Property="Visibility" Value="Collapsed"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsFileSelected}" Value="False">
-                    <Setter Property="Visibility" Value="Visible"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Background" Value="{StaticResource BaseBrush}"/>
+        <Style x:Key="GlassTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource GlassInputBg}"/>
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource GlassCardBorder}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,7"/>
+            <Setter Property="Padding" Value="12,9"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="CaretBrush" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="CaretBrush" Value="{StaticResource AccentBrush}"/>
         </Style>
 
-        <Style x:Key="ModernComboBox" TargetType="ComboBox">
-            <Setter Property="Background" Value="{StaticResource CardBrush}"/>
+        <Style x:Key="GlassComboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource GlassCardBg}"/>
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource GlassCardBorder}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Padding" Value="12,10"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -227,12 +292,12 @@
                                     <ToggleButton Grid.Column="1" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent" Width="30" BorderThickness="0" Focusable="False">
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
-                                                <Border Background="Transparent" CornerRadius="0,8,8,0">
+                                                <Border Background="Transparent" CornerRadius="0,10,10,0">
                                                     <TextBlock Text="▼" FontSize="8" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="{StaticResource HoverBrush}"/>
+                                                        <Setter Property="Background" Value="{StaticResource GlassHoverBg}"/>
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
@@ -241,7 +306,7 @@
                                 </Grid>
                             </Border>
                             <Popup x:Name="Popup" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True">
-                                <Border Background="{StaticResource ElevatedBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="8" Padding="4" MaxHeight="300">
+                                <Border Background="{StaticResource GlassElevatedBg}" BorderBrush="{StaticResource GlassCardBorder}" BorderThickness="1" CornerRadius="12" Padding="6" MaxHeight="300">
                                     <ScrollViewer>
                                         <ItemsPresenter/>
                                     </ScrollViewer>
@@ -250,10 +315,10 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
                             </Trigger>
                             <Trigger Property="IsDropDownOpen" Value="True">
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -267,15 +332,15 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ComboBoxItem">
-                                    <Border Background="{TemplateBinding Background}" Padding="10,7" CornerRadius="5">
+                                    <Border Background="{TemplateBinding Background}" Padding="12,8" CornerRadius="8">
                                         <ContentPresenter/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource HoverBrush}"/>
+                                            <Setter Property="Background" Value="{StaticResource GlassHoverBg}"/>
                                         </Trigger>
                                         <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
                                             <Setter Property="Foreground" Value="White"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
@@ -287,25 +352,18 @@
             </Setter>
         </Style>
 
-        <Style x:Key="QuantizationComboBox" TargetType="ComboBox" BasedOn="{StaticResource ModernComboBox}"/>
+        <Style x:Key="GlassComboBoxSmall" TargetType="ComboBox" BasedOn="{StaticResource GlassComboBox}"/>
 
-        <Style x:Key="SectionTitle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
-            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-        </Style>
-
-        <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
-            <Setter Property="Height" Value="5"/>
-            <Setter Property="Background" Value="{StaticResource ElevatedBrush}"/>
+        <Style x:Key="GlassProgressBar" TargetType="ProgressBar">
+            <Setter Property="Height" Value="6"/>
+            <Setter Property="Background" Value="{StaticResource GlassInputBg}"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ProgressBar">
                         <Border Background="{TemplateBinding Background}" CornerRadius="4">
                             <Border x:Name="PART_Track" CornerRadius="4">
-                                <Border x:Name="PART_Indicator" Background="{StaticResource PrimaryGradient}" CornerRadius="4" HorizontalAlignment="Left"/>
+                                <Border x:Name="PART_Indicator" Background="{StaticResource AccentGradient}" CornerRadius="4" HorizontalAlignment="Left"/>
                             </Border>
                         </Border>
                     </ControlTemplate>
@@ -313,24 +371,37 @@
             </Setter>
         </Style>
 
+        <Style x:Key="SectionLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
+        </Style>
+
+        <Style x:Key="WelcomeOverlayStyle" TargetType="Border">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsFileSelected}" Value="False">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
     </Window.Resources>
 
-    <Window.DataContext>
-        <vm:MainViewModel />
-    </Window.DataContext>
+    <Window.Background>
+        <SolidColorBrush Color="#0F0A1E"/>
+    </Window.Background>
 
-    <DockPanel AllowDrop="True" LastChildFill="True">
+    <DockPanel AllowDrop="True" LastChildFill="True" Background="{StaticResource WindowBg}">
 
-        
-<StatusBar DockPanel.Dock="Bottom" Background="{StaticResource SidebarBg}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" Height="28">
-            <StatusBarItem Margin="14,0">
+        <StatusBar DockPanel.Dock="Bottom" Background="#0A0A1A" BorderBrush="{StaticResource GlassCardBorder}" BorderThickness="0,1,0,0" Height="30">
+            <StatusBarItem Margin="16,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Width="7" Height="7" CornerRadius="4" Background="{StaticResource SuccessBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    <Ellipse Width="6" Height="6" Fill="{StaticResource GreenBrush}" Margin="0,0,10,0" VerticalAlignment="Center"/>
                     <TextBlock Grid.Column="1" Text="{Binding StatusMessage}" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"/>
                 </Grid>
             </StatusBarItem>
@@ -338,21 +409,21 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="340"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            
-<Border Grid.Column="0" Background="{StaticResource SidebarBg}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20,20,20,0">
+            <Border Grid.Column="0" Background="{StaticResource GlassSidebarBg}" BorderBrush="{StaticResource GlassCardBorder}" BorderThickness="0,0,1,0">
+                <Grid>
+                    <Border Background="{StaticResource GrainTexture}"/>
+                    <ScrollViewer Style="{StaticResource GlassScrollViewer}" Padding="20,20,20,0">
                     <StackPanel>
-                        
-<TextBlock Text="AUDIO FILE" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
-                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,20">
-                            <StackPanel>
-                                <TextBlock Text="File Name" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                <TextBlock Text="{Binding Metadata.FileName}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="13" TextWrapping="Wrap" Margin="0,3,0,12"/>
 
+                        <TextBlock Text="AUDIO FILE" Style="{StaticResource SectionLabel}" Margin="0,0,0,14"/>
+                        <Border Style="{StaticResource GlassCardHover}" Padding="18" Margin="0,0,0,24">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Metadata.FileName}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="14" TextWrapping="Wrap"/>
+                                <Border Height="1" Background="{StaticResource GlassCardBorder}" Margin="0,10,0,12"/>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -363,16 +434,14 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-
-                                    <StackPanel Margin="0,0,0,8">
+                                    <StackPanel Margin="0,0,0,10">
                                         <TextBlock Text="Duration" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding Metadata.DurationDisplay}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="14" Margin="0,2,0,0"/>
+                                        <TextBlock Text="{Binding Metadata.DurationDisplay}" Foreground="{StaticResource CyanBrush}" FontWeight="Bold" FontSize="16" Margin="0,2,0,0"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="1" Margin="0,0,0,8">
+                                    <StackPanel Grid.Column="1" Margin="0,0,0,10">
                                         <TextBlock Text="File Size" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
                                         <TextBlock Text="{Binding Metadata.FileSize, StringFormat={}{0:N0} B}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="14" Margin="0,2,0,0"/>
                                     </StackPanel>
-
                                     <StackPanel Grid.Row="1">
                                         <TextBlock Text="Sample Rate" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
                                         <TextBlock Text="{Binding Metadata.SampleRate, StringFormat={}{0} Hz}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="13" Margin="0,2,0,0"/>
@@ -381,12 +450,11 @@
                                         <TextBlock Text="Channels" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
                                         <TextBlock Text="{Binding Metadata.Channels}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="13" Margin="0,2,0,0"/>
                                     </StackPanel>
-
-                                    <StackPanel Grid.Row="2" Margin="0,8,0,0">
+                                    <StackPanel Grid.Row="2" Margin="0,10,0,0">
                                         <TextBlock Text="Bit Rate" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
                                         <TextBlock Text="{Binding Metadata.BitRate, StringFormat={}{0:N0} bps}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="13" Margin="0,2,0,0"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,8,0,0">
+                                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,10,0,0">
                                         <TextBlock Text="Encoding" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
                                         <TextBlock Text="{Binding Metadata.Encoding}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold" FontSize="13" Margin="0,2,0,0"/>
                                     </StackPanel>
@@ -394,112 +462,96 @@
                             </StackPanel>
                         </Border>
 
-                        
-<TextBlock Text="GLOBAL SETTINGS" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
-                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,16">
+                        <TextBlock Text="SETTINGS" Style="{StaticResource SectionLabel}" Margin="0,0,0,14"/>
+                        <Border Style="{StaticResource GlassCard}" Padding="18" Margin="0,0,0,20">
                             <StackPanel>
                                 <TextBlock Text="Target Sample Rate (Hz)" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding TargetSampleRate, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,0"/>
-                                
-                                <TextBlock Text="Quantization (Bits)" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,14,0,0"/>
-                                <ComboBox Style="{StaticResource QuantizationComboBox}" ItemsSource="{Binding AvailableBitDepths}" 
-                                          SelectedItem="{Binding QuantizationBits}" Margin="0,6,0,0"/>
+                                <TextBox Style="{StaticResource GlassTextBox}" Text="{Binding TargetSampleRate, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0"/>
+                                <TextBlock Text="Quantization (Bits)" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,16,0,0"/>
+                                <ComboBox Style="{StaticResource GlassComboBoxSmall}" ItemsSource="{Binding AvailableBitDepths}" SelectedItem="{Binding QuantizationBits}" Margin="0,8,0,0"/>
                             </StackPanel>
                         </Border>
 
-                        
-<TextBlock Text="ALGORITHM" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
-                        <ComboBox Style="{StaticResource ModernComboBox}" 
-                                  ItemsSource="{Binding Algorithms}" 
-                                  SelectedItem="{Binding SelectedAlgorithm}" 
-                                  DisplayMemberPath="Name" 
-                                  Margin="0,0,0,16"/>
+                        <TextBlock Text="ALGORITHM" Style="{StaticResource SectionLabel}" Margin="0,0,0,14"/>
+                        <ComboBox Style="{StaticResource GlassComboBox}" ItemsSource="{Binding Algorithms}" SelectedItem="{Binding SelectedAlgorithm}" DisplayMemberPath="Name" Margin="0,0,0,16"/>
 
-                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,20">
+                        <Border Style="{StaticResource GlassCard}" Padding="18" Margin="0,0,0,24">
                             <StackPanel>
-                                
-<StackPanel Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='Delta Modulation'}">
+                                <StackPanel Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='Delta Modulation'}">
                                     <TextBlock Text="Step Size" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                    <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding SelectedAlgorithm.StepSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,0"/>
+                                    <TextBox Style="{StaticResource GlassTextBox}" Text="{Binding SelectedAlgorithm.StepSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0"/>
                                 </StackPanel>
-
-                                
-<StackPanel Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='Adaptive Delta Modulation'}">
+                                <StackPanel Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='Adaptive Delta Modulation'}">
                                     <TextBlock Text="Min Step" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                    <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding SelectedAlgorithm.MinStep, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,0"/>
-                                    <TextBlock Text="Multiplier" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,12,0,0"/>
-                                    <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding SelectedAlgorithm.Multiplier, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,0"/>
+                                    <TextBox Style="{StaticResource GlassTextBox}" Text="{Binding SelectedAlgorithm.MinStep, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Multiplier" FontSize="10" Foreground="{StaticResource TextMutedBrush}" Margin="0,14,0,0"/>
+                                    <TextBox Style="{StaticResource GlassTextBox}" Text="{Binding SelectedAlgorithm.Multiplier, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0"/>
                                 </StackPanel>
-
-                                
-<StackPanel Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='Nonlinear Quantization (Mu-law)'}">
+                                <StackPanel Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='Nonlinear Quantization (Mu-law)'}">
                                     <TextBlock Text="Mu Constant" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                    <TextBox Style="{StaticResource ModernTextBox}" Text="{Binding SelectedAlgorithm.Mu, UpdateSourceTrigger=PropertyChanged}" Margin="0,6,0,0"/>
+                                    <TextBox Style="{StaticResource GlassTextBox}" Text="{Binding SelectedAlgorithm.Mu, UpdateSourceTrigger=PropertyChanged}" Margin="0,8,0,0"/>
                                 </StackPanel>
-                                
                                 <TextBlock Text="Standard DPCM — no parameters" FontSize="11" Foreground="{StaticResource TextMutedBrush}" FontStyle="Italic"
                                            Visibility="{Binding SelectedAlgorithm.Name, Converter={StaticResource StringToVisibilityConverter}, ConverterParameter='DPCM'}"/>
                             </StackPanel>
                         </Border>
 
-                        
-<Grid Margin="0,0,0,20">
+                        <Grid Margin="0,0,0,24">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="COMPRESS" Command="{Binding ProcessCompressionCommand}" Style="{StaticResource ProcessButtonStyle}"/>
-                            <Button Content="CANCEL" Command="{Binding CancelCompressionCommand}" Style="{StaticResource CancelButtonStyle}"/>
-                            <Button Grid.Column="1" Content="↺" Command="{Binding ResetCommand}" Style="{StaticResource SecondaryButton}" Width="42" Padding="0" Margin="8,0,0,0" FontSize="18"/>
+                            <Button Content="COMPRESS" Command="{Binding ProcessCompressionCommand}" Style="{StaticResource ProcessBtnStyle}"/>
+                            <Button Grid.Column="1" Content="DECOMPRESS" Command="{Binding DecompressCommand}" Style="{StaticResource ProcessBtnStyle}" Background="{StaticResource CyanBrush}" Foreground="#0F0A1E" Margin="10,0,0,0"
+                                    Visibility="{Binding HasCompressedData, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                            <Button Grid.Column="2" Content="CANCEL" Command="{Binding CancelCompressionCommand}" Style="{StaticResource CancelBtnStyle}"/>
+                            <Button Grid.Column="3" Content="⟳" Command="{Binding ResetCommand}" Style="{StaticResource GlassSecondButton}" Width="46" Padding="0" Margin="10,0,0,0" FontSize="20"/>
                         </Grid>
 
-                        
-<Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,20">
+                        <Border Style="{StaticResource GlassCard}" Padding="18" Margin="0,0,0,20">
                             <StackPanel>
                                 <Grid Margin="0,0,0,8">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="PROGRESS" Style="{StaticResource SectionTitle}"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding CompressionProgress, StringFormat={}{0:F0}%}" FontSize="13" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Text="PROGRESS" Style="{StaticResource SectionLabel}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding CompressionProgress, StringFormat={}{0:F0}%}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource AccentBrush}"/>
                                 </Grid>
-                                <ProgressBar Value="{Binding CompressionProgress}" Style="{StaticResource ProgressBarStyle}"/>
+                                <ProgressBar Value="{Binding CompressionProgress}" Style="{StaticResource GlassProgressBar}"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
                 </ScrollViewer>
+                </Grid>
             </Border>
 
-            
-<Grid Grid.Column="1" Background="{StaticResource BaseBrush}">
-                <Grid Margin="28">
+            <Grid Grid.Column="1">
+                <Grid Background="{StaticResource GrainTexture}" IsHitTestVisible="False" Opacity="0.5"/>
+                <Grid Margin="24">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    
-<Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,24">
+                    <Border Style="{StaticResource GlassCard}" Padding="16" Margin="0,0,0,18">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="▶ Original" Command="{Binding PlayOriginalCommand}" Style="{StaticResource IconButton}" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,8,0"/>
-                                <Button Content="▶ Processed" Command="{Binding PlayProcessedCommand}" Style="{StaticResource IconButton}" Foreground="{StaticResource CyanBrush}" Margin="0,0,8,0"/>
-                                <Button Content="■ Stop" Command="{Binding StopPlaybackCommand}" Style="{StaticResource IconButton}" Foreground="{StaticResource DangerBrush}"/>
+                                <Button Content="▶ Original" Command="{Binding PlayOriginalCommand}" Style="{StaticResource GlassIconBtn}" Foreground="{StaticResource AccentBrush}" Margin="0,0,10,0"/>
+                                <Button Content="▶ Processed" Command="{Binding PlayProcessedCommand}" Style="{StaticResource GlassIconBtn}" Foreground="{StaticResource CyanBrush}" Margin="0,0,10,0"/>
+                                <Button Content="⏹ Stop" Command="{Binding StopPlaybackCommand}" Style="{StaticResource GlassIconBtn}" Foreground="{StaticResource RedBrush}"/>
                             </StackPanel>
-
-                            <Button Grid.Column="1" Content="Export WAV" Click="SaveButton_Click" Style="{StaticResource ModernButton}" Background="{StaticResource SuccessBrush}"/>
+                            <Button Grid.Column="1" Content="Export WAV" Click="SaveButton_Click" Style="{StaticResource GlassButton}" Background="{StaticResource GreenBrush}"/>
                         </Grid>
                     </Border>
 
-                    
-<Grid Grid.Row="1">
+                    <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -509,71 +561,68 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,10,0">
+                        <Border Style="{StaticResource GlassCard}" Padding="16" Margin="0,0,12,0">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="COMPRESSION EFFICIENCY" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
-                                <lvc:CartesianChart Grid.Row="1" Series="{Binding CompressionRatioSeries}" 
-                                    ZoomMode="X" TooltipPosition="Top"/>
+                                <TextBlock Text="COMPRESSION RATIO" Style="{StaticResource SectionLabel}" Margin="0,0,0,12"/>
+                                <lvc:CartesianChart Grid.Row="1" Series="{Binding CompressionRatioSeries}" XAxes="{Binding RatioXAxes}" YAxes="{Binding RatioYAxes}" ZoomMode="X" TooltipPosition="Top"/>
                             </Grid>
                         </Border>
 
-                        <Border Grid.Column="1" Style="{StaticResource CardBorder}" Padding="16" Margin="10,0,0,0">
+                        <Border Grid.Column="1" Style="{StaticResource GlassCard}" Padding="16" Margin="12,0,0,0">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="PROCESSING SPEED" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
-                                <lvc:CartesianChart Grid.Row="1" Series="{Binding ProcessingSpeedSeries}"
-                                    ZoomMode="X" TooltipPosition="Top"/>
+                                <TextBlock Text="SPEED ANALYSIS" Style="{StaticResource SectionLabel}" Margin="0,0,0,12"/>
+                                <lvc:CartesianChart Grid.Row="1" Series="{Binding ProcessingSpeedSeries}" XAxes="{Binding SpeedXAxes}" YAxes="{Binding SpeedYAxes}" ZoomMode="X" TooltipPosition="Top"/>
                             </Grid>
                         </Border>
 
-                        
-<Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource CardBorder}" Padding="20" Margin="0,20,0,0">
+                        <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource GlassCardHover}" Padding="24" Margin="0,20,0,0">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <UniformGrid Columns="5" Margin="0,0,0,14">
+                                <UniformGrid Columns="5" Margin="0,0,0,16">
                                     <StackPanel>
                                         <TextBlock Text="Algorithm" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.AlgorithmName}" Foreground="{StaticResource PrimaryBrush}" FontSize="14" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding LastResult.AlgorithmName}" Foreground="{StaticResource AccentBrush}" FontSize="15" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                     <StackPanel Grid.Column="1" Grid.ColumnSpan="2">
                                         <TextBlock Text="Parameters" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.Parameters}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="SemiBold" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding LastResult.Parameters}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="12" FontWeight="SemiBold" Margin="0,6,0,0" TextWrapping="Wrap"/>
                                     </StackPanel>
                                     <StackPanel>
                                         <TextBlock Text="SNR" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.SnrDisplay}" Foreground="{StaticResource PrimaryBrush}" FontSize="14" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding LastResult.SnrDisplay}" Foreground="{StaticResource CyanBrush}" FontSize="15" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                     <StackPanel>
                                         <TextBlock Text="Savings" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.SavingsPercentage, StringFormat={}{0:F1}%}" Foreground="{StaticResource SuccessBrush}" FontSize="14" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding LastResult.SavingsPercentage, StringFormat={}{0:F1}%}" Foreground="{StaticResource GreenBrush}" FontSize="15" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                 </UniformGrid>
                                 <UniformGrid Grid.Row="1" Columns="4">
                                     <StackPanel>
                                         <TextBlock Text="Input Size" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.OriginalSize, StringFormat={}{0:N0} B}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="15" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding LastResult.OriginalSize, StringFormat={}{0:N0} B}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="16" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                     <StackPanel>
                                         <TextBlock Text="Output Size" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.CompressedSize, StringFormat={}{0:N0} B}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="15" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding LastResult.CompressedSize, StringFormat={}{0:N0} B}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="16" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                     <StackPanel>
                                         <TextBlock Text="Latency" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding LastResult.ProcessingTimeDisplay}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="15" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding LastResult.ProcessingTimeDisplay}" Foreground="{StaticResource PinkBrush}" FontSize="16" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                     <StackPanel>
                                         <TextBlock Text="Status" FontSize="10" Foreground="{StaticResource TextMutedBrush}"/>
-                                        <TextBlock Text="{Binding StatusMessage}" Foreground="{StaticResource SuccessBrush}" FontSize="13" FontWeight="Bold" Margin="0,4,0,0"/>
+                                        <TextBlock Text="{Binding StatusMessage}" Foreground="{StaticResource GreenBrush}" FontSize="13" FontWeight="Bold" Margin="0,6,0,0"/>
                                     </StackPanel>
                                 </UniformGrid>
                             </Grid>
@@ -582,28 +631,39 @@
                 </Grid>
             </Grid>
 
-            
-<Border Grid.ColumnSpan="2" Style="{StaticResource DragOverBorderStyle}" IsHitTestVisible="False" Panel.ZIndex="100"/>
+            <Rectangle Grid.ColumnSpan="2" IsHitTestVisible="False" Panel.ZIndex="100" Fill="Transparent" Stroke="Transparent" StrokeThickness="3">
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDraggingOver}" Value="True">
+                                <Setter Property="Stroke" Value="{StaticResource AccentBrush}"/>
+                                <Setter Property="Fill" Value="#20A855F7"/>
+                                <Setter Property="StrokeDashArray" Value="10,8"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
 
-            
-<Border Grid.ColumnSpan="2" Panel.ZIndex="50" Background="#F00B1121" Style="{StaticResource WelcomeScreenStyle}">
+            <Border Grid.ColumnSpan="2" Panel.ZIndex="50" Background="#E80F0A1E" Style="{StaticResource WelcomeOverlayStyle}">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Border Width="110" Height="110" CornerRadius="55" Margin="0,0,0,28" BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="2">
-                        <Border Background="{StaticResource CardGradient}" CornerRadius="55">
-                            <TextBlock Text="♫" FontSize="52" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PrimaryBrush}"/>
+                    <Grid Width="140" Height="140" Margin="0,0,0,32">
+                        <Ellipse Width="140" Height="140" Fill="{StaticResource AccentBrush}" Opacity="0.12"/>
+                        <Border Width="120" Height="120" CornerRadius="60" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="{StaticResource AccentBrush}" BorderThickness="2" Background="{StaticResource GlassCardBg}">
+                            <TextBlock Text="♫" FontSize="58" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AccentBrush}"/>
                         </Border>
-                    </Border>
-                    <TextBlock Text="AudioLab Pro" FontSize="30" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
-                    <TextBlock Text="Professional Audio Compression Suite" FontSize="14" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,36"/>
-                    
-                    <Border Background="{StaticResource CardBrush}" CornerRadius="14" Padding="36" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Width="420">
+                    </Grid>
+                    <TextBlock Text="AudioLab Pro" FontSize="36" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock Text="Professional Audio Compression Suite" FontSize="14" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,44"/>
+
+                    <Border Style="{StaticResource GlassCard}" Padding="44" Width="460">
                         <StackPanel>
-                            <TextBlock Text="Drop your audio file to begin" FontSize="14" Foreground="{StaticResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
-                            <Border Width="100" Height="1" Background="{StaticResource BorderBrush}" HorizontalAlignment="Center" Margin="0,0,0,18"/>
-                            <Button Content="Browse Files" Command="{Binding BrowseFileCommand}" Style="{StaticResource ModernButton}" Width="200" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Drop your audio file to begin" FontSize="15" Foreground="{StaticResource TextPrimaryBrush}" HorizontalAlignment="Center" Margin="0,0,0,22"/>
+                            <Border Width="80" Height="1" Background="{StaticResource GlassCardBorder}" HorizontalAlignment="Center" Margin="0,0,0,22"/>
+                            <Button Content="Browse Files" Command="{Binding BrowseFileCommand}" Style="{StaticResource GlassButton}" Width="220" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Border>
-                    <TextBlock Text="Supports WAV · MP3 · FLAC · M4A" FontSize="11" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center" Margin="0,18,0,0"/>
+                    <TextBlock Text="Supports WAV · MP3 · FLAC · M4A" FontSize="11" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Center" Margin="0,22,0,0"/>
                 </StackPanel>
             </Border>
         </Grid>
